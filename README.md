@@ -77,4 +77,3 @@ The crate currently exposes the following macros:
 ## License
 
 Licensed under MIT or Apache-2.
-

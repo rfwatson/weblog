@@ -9,8 +9,7 @@ keywords = ["wasm", "webassembly", "console", "log", "logging"]
 license = "MIT OR Apache-2.0"
 
 [lib]
-# FIXME: `cargo test` refuses to cross-compile doctests, even with `-Zdoctest-xcompile`.
-# E.g.: `cargo test --target wasm32-unknown-unknown -Zdoctest-xcompile`
+# FIXME: https://github.com/rfwatson/weblog/issues/2
 test = false
 doctest = true
 

@@ -1,6 +1,6 @@
 [package]
 name = "weblog"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Rob Watson <rfwatson@users.noreply.github.com>"]
 edition = "2018"
 description = "weblog is a crate that defines a set of macros for calling `console.log()` and other members of the browser's console API when targeting Wasm."

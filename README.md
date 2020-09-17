@@ -54,23 +54,31 @@ No stringification is performed on the Rust side - so objects will be fully intr
 
 ```toml
 # Defaults to web-sys
-weblog = "0.2"
+weblog = "0.3.0-beta.1"
 
 # For stdweb:
-weblog = { version = "0.2", default-features = false, features = ["std_web"] }
+weblog = { version = "0.3.0-beta.1", default-features = false, features = ["std_web"] }
 ```
 
 See the documentation for usage examples.
 
 The crate currently exposes the following macros:
 
+* `console_assert!`
 * `console_clear!`
+* `console_count!`
+* `console_count_reset!`
 * `console_debug!`
 * `console_dir!`
 * `console_dirxml!`
 * `console_error!`
+* `console_exception!`
 * `console_info!`
 * `console_log!`
+* `console_table!`
+* `console_time!`
+* `console_time_end!`
+* `console_time_stamp!`
 * `console_trace!`
 * `console_warn!`
 

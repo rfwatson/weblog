@@ -64,7 +64,7 @@
 //! By default, the crate assumes the presence of the `web-sys` crate.
 //!
 //! ```toml
-//! weblog = "0.1"
+//! weblog = "0.3"
 //! ```
 //!
 //!
@@ -72,13 +72,16 @@
 //! with `stdweb`, enable the feature in `Cargo.toml`:
 //!
 //! ```toml
-//! weblog = { version = "0.1", default-features = false, features = ["stdweb"] }
+//! weblog = { version = "0.3", default-features = false, features = ["stdweb"] }
 //! ```
 //!
 mod console;
 
 #[cfg(feature = "web_sys")]
-pub use self::console::web_sys::*;
+pub use weblog_proc_macro::*;
+
+#[cfg(feature = "web_sys")]
+pub use ::web_sys;
 
 #[cfg(feature = "std_web")]
 pub use self::console::std_web::*;

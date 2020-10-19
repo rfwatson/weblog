@@ -1,6 +1,6 @@
 [package]
 name = "weblog"
-version = "0.3.0-beta.1"
+version = "0.3.0"
 authors = ["Rob Watson <rfwatson@users.noreply.github.com>"]
 edition = "2018"
 description = "weblog is a crate that defines a set of macros for calling `console.log()` and other members of the browser's console API when targeting Wasm."
@@ -20,6 +20,6 @@ std_web = ["stdweb"]
 
 [dependencies]
 stdweb = { version = ">= 0.4", optional = true }
-weblog-proc-macro = { path = "./weblog-proc-macro", version = "0.3.0-beta.1", optional = true }
+weblog-proc-macro = { path = "./weblog-proc-macro", version = "0.3.0", optional = true }
 web-sys = { version = "0.3", features = ["console"], optional = true }
 wasm-bindgen = { version = "0.2", optional = true }

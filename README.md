@@ -54,10 +54,10 @@ No stringification is performed on the Rust side - so objects will be fully intr
 
 ```toml
 # Defaults to web-sys
-weblog = "0.3.0-beta.1"
+weblog = "0.3.0"
 
 # For stdweb:
-weblog = { version = "0.3.0-beta.1", default-features = false, features = ["std_web"] }
+weblog = { version = "0.3.0", default-features = false, features = ["std_web"] }
 ```
 
 See the documentation for usage examples.

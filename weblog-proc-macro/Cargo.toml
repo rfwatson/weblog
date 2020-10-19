@@ -1,6 +1,6 @@
 [package]
 name = "weblog-proc-macro"
-version = "0.3.0-beta.1"
+version = "0.3.0"
 authors = ["Rob Watson <rfwatson@users.noreply.github.com>"]
 repository = "https://github.com/rfwatson/weblog"
 description = "weblog is a crate that defines a set of macros for calling `console.log()` and other members of the browser's console API when targeting Wasm."

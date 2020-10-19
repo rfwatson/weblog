@@ -1,6 +1,6 @@
 [package]
 name = "weblog-example-web-sys"
-version = "0.3.0-beta.1"
+version = "0.3.0"
 authors = ["Rob Watson <rfwatson@users.noreply.github.com>"]
 edition = "2018"
 

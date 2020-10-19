@@ -1,5 +1,16 @@
 # Weblog
 
+<!-- Version -->
+<a href="https://crates.io/crates/weblog">
+  <img src="https://img.shields.io/crates/v/weblog.svg?style=flat-square"
+  alt="Crates.io version" />
+</a>
+<!-- Docs -->
+<a href="https://docs.rs/weblog">
+  <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
+    alt="docs.rs docs" />
+</a>
+
 weblog is a crate that defines a set of macros for calling `console.log()`, `console.error()` and other members of the browser's console API when targeting Wasm.
 
 ## Features

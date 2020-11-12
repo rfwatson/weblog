@@ -83,5 +83,8 @@ pub use weblog_proc_macro::*;
 #[cfg(feature = "web_sys")]
 pub use ::web_sys;
 
+#[cfg(feature = "web_sys")]
+pub use ::wasm_bindgen;
+
 #[cfg(feature = "std_web")]
 pub use self::console::std_web::*;

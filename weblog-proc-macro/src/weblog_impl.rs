@@ -69,7 +69,7 @@ fn quote_arg(arg: &Expr, arg_mode: ArgMode) -> TokenStream2 {
             quote! { #arg }
         }
         ArgMode::IntoJsValue => {
-            quote! { &::std::convert::Into::<::wasm_bindgen::JsValue>::into(#arg) }
+            quote! { &::std::convert::Into::<::weblog::wasm_bindgen::JsValue>::into(#arg) }
         }
     }
 }

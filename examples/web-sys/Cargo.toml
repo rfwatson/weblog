@@ -1,7 +1,8 @@
 [package]
 name = "weblog-example-web-sys"
-version = "0.3.0"
-authors = ["Rob Watson <rfwatson@users.noreply.github.com>"]
+version = "0.4.0-beta.1"
+repository = "https://git.netflux.io/rob/weblog"
+authors = ["Rob Watson"]
 edition = "2018"
 
 [lib]

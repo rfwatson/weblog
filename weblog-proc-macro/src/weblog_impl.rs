@@ -4,7 +4,7 @@ use quote::quote;
 use std::cmp;
 use syn::parse::{Parse, ParseStream};
 use syn::punctuated::Punctuated;
-use syn::{bracketed, parse_macro_input, Expr, Result, Token};
+use syn::{bracketed, Expr, Result, Token};
 
 // The maximum number of variadic arguments accepted by web-sys function
 // groups such as `console::log_n`:
@@ -18,7 +18,8 @@ const MAX_VARIADIC_ARGS: usize = 7;
 //
 // * `func`: an object containing the target function name and parameter configuration.
 // * `arg_modes`: an Iterator that will be called once per argument parsed from the input tokens.
-// * `input`: the raw input tokens, as provided by the macro caller.
+// * `crate_name`: an identifier that resolves to the name of the calling crate.
+// * `in_args`: zero or more punctuated expressions passed as arguments by the caller.
 pub fn quote_console_func(
     ConsoleFunc {
         name,
@@ -26,9 +27,9 @@ pub fn quote_console_func(
         is_variadic,
     }: ConsoleFunc,
     mut arg_modes: impl Iterator<Item = ArgMode>,
-    input: TokenStream,
+    crate_name: Ident,
+    in_args: Punctuated<Expr, Token![,]>,
 ) -> TokenStream {
-    let InArgs(crate_name, in_args) = parse_macro_input!(input as InArgs);
     let mut out_args = in_args
         .iter()
         .map(|arg| quote_arg(&crate_name, arg, arg_modes.next().unwrap_or_default()));
@@ -67,7 +68,7 @@ pub fn quote_console_func(
     (quote! { #crate_name::web_sys::console::#ident(#args) }).into()
 }
 
-fn quote_arg(crate_name: &TokenStream2, arg: &Expr, arg_mode: ArgMode) -> TokenStream2 {
+fn quote_arg(crate_name: &Ident, arg: &Expr, arg_mode: ArgMode) -> TokenStream2 {
     match arg_mode {
         ArgMode::PassThrough => {
             quote! { #arg }
@@ -119,10 +120,12 @@ impl Default for ArgMode {
     }
 }
 
-// InArgs is a struct required during parsing of input arguments.
-struct InArgs(TokenStream2, Punctuated<Expr, Token![,]>);
+pub struct InputTokens {
+    pub crate_name: Ident,
+    pub args: Punctuated<Expr, Token![,]>,
+}
 
-impl Parse for InArgs {
+impl Parse for InputTokens {
     fn parse(input: ParseStream) -> Result<Self> {
         input.parse::<Token![#]>()?;
         input.parse::<Token![!]>()?;
@@ -132,9 +135,9 @@ impl Parse for InArgs {
         bracketed.parse::<Token![crate]>()?;
         bracketed.parse::<Token![ = ]>()?;
 
-        let crate_name = bracketed.parse()?;
+        let crate_name = bracketed.parse::<Ident>()?;
         let args: Punctuated<Expr, Token![,]> = Punctuated::parse_terminated(&input)?;
 
-        Ok(Self(crate_name, args))
+        Ok(Self { crate_name, args })
     }
 }

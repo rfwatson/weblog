@@ -6,6 +6,10 @@ use syn::parse::{Parse, ParseStream};
 use syn::punctuated::Punctuated;
 use syn::{bracketed, parse_macro_input, Expr, Result, Token};
 
+// The maximum number of variadic arguments accepted by web-sys function
+// groups such as `console::log_n`:
+const MAX_VARIADIC_ARGS: usize = 7;
+
 // quote_console_func builds and quotes a call to the browser's console API, based on the
 // provided console function and argument types and the input token stream provider by
 // the macro caller.
@@ -34,7 +38,7 @@ pub fn quote_console_func(
     let num_variadic = cmp::max(num_provided - num_fixed, 0);
 
     let ident = {
-        let func_name = if is_variadic && num_variadic <= 7 {
+        let func_name = if is_variadic && num_variadic <= MAX_VARIADIC_ARGS {
             format!("{}_{}", name, num_variadic)
         } else {
             name
@@ -47,7 +51,7 @@ pub fn quote_console_func(
         for _ in 0..num_fixed {
             args.push(out_args.next().unwrap());
         }
-        if num_variadic > 7 {
+        if num_variadic > MAX_VARIADIC_ARGS {
             let variadic_args = out_args.collect::<Punctuated<_, Token![,]>>();
             let ary = quote! {
                 &::std::iter::FromIterator::from_iter(::std::iter::IntoIterator::into_iter(::std::vec![#variadic_args]))
